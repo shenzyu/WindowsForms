@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="winform_demo" EntityNamespace="WindowsForms" ContextNamespace="WindowsForms" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SZY-PC;Initial Catalog=winform_demo;Integrated Security=True" SettingsObjectName="WindowsForms.Properties.Settings" SettingsPropertyName="winform_demoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.category" Member="category">
+    <Type Name="category">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="category_name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="is_leaf" Type="System.Int32" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="parent_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
