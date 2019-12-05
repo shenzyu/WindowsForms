@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace WindowsForms.Model
 {
-    public class Category
+   public class Student
     {
         public long Id { get; set; }
-        public int  IsLeaf {get; set; }
-        public string CategoryName { get; set; }
-        public long ParentId { get; set; }
+        public int Sex { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string NativePlace { get; set; }
     }
 }

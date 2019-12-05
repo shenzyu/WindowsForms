@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsForms.Model;
 
 namespace WindowsForms
 {
-    public partial class Form1 : Form
+    public partial class FormList : Form
     {
-        public Form1()
+        public FormList()
         {
             InitializeComponent();
         }
@@ -22,28 +16,96 @@ namespace WindowsForms
         private void Form1_Load(object sender, EventArgs e)
         {
            
+            InitListView(this.studentList);
+
 
         }
 
-        private void queryDate_Click(object sender, EventArgs e)
+        private void InitListView(ListView studentList)
         {
+           
+            //添加列名
+            //设置属性
+            studentList.GridLines = true;  //显示网格线
+            studentList.FullRowSelect = true;  //显示全行
+            studentList.MultiSelect = false;  //设置只能单选
+            studentList.View = View.Details;  //设置显示模式为详细
+            studentList.HoverSelection = true;  //当鼠标停留数秒后自动选择
+            //把列名添加到listView中
+            studentList.Columns.Add("编号", 90, HorizontalAlignment.Center);
+            studentList.Columns.Add("姓名", 90, HorizontalAlignment.Center);
+            studentList.Columns.Add("性别", 90, HorizontalAlignment.Center);
+            studentList.Columns.Add("电话", 90, HorizontalAlignment.Center);
+            studentList.Columns.Add("籍贯", 100, HorizontalAlignment.Center);
+
+            List<Student> studentDateList = SelectStudent();
+
+            if (studentDateList.Count > 0)
+            {
+                this.studentList.BeginUpdate();
+                studentDateList.ForEach(s =>
+                {
+                    ListViewItem studentItem = new ListViewItem();
+                    studentItem.Text = s.Id.ToString();
+                    studentItem.SubItems.Add(s.Name);
+                    switch (s.Sex)
+                    {
+                        case 0:
+                            studentItem.SubItems.Add("男");
+                            break;
+                        case 1:
+                            studentItem.SubItems.Add("女");
+                            break;
+                    }
+
+                    studentItem.SubItems.Add(s.Phone);
+                    studentItem.SubItems.Add(s.NativePlace);
+                    studentList.Items.Add(studentItem);
+                });
+
+                this.studentList.EndUpdate();
+            }
+
+        }
+
+        private void add_Click(object sender, EventArgs e)
+        {
+            AddForm addForm = new AddForm { Visible = false, StartPosition = FormStartPosition.CenterParent };
+            addForm.refresh += RefreshForm;
+            addForm.ShowDialog();
+        }
+
+        private List<Student> SelectStudent()
+        {
+            List<Student> studentList = new List<Student>();
             using (DataClasses1DataContext dc = new DataClasses1DataContext())
             {
-                var result = from a in dc.category
-                             select a;
-                foreach(var c in result)
-                {
-                    Debug.WriteLine("country category_name:" + c.category_name);
-                    Debug.WriteLine("parent_id:" + c.parent_id);
-                    Debug.WriteLine("is_leaf:" + c.is_leaf);
-                    Debug.WriteLine("id:" + c.id);
-                }
-                
-            }
-        }
+                var result = from Student in dc.Student
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+                             select Student;
+
+                foreach (var st in result)
+                {
+                    Student student = new Student
+                    {
+                        Id = st.Id,
+                        Name = st.Name,
+                        Sex = st.Sex,
+                        Phone = st.Phone,
+                        NativePlace = st.NativePlace
+                    };
+                    studentList.Add(student);
+                }
+
+            }
+            return studentList;
+        }
+        public void RefreshForm()
         {
+            studentList.Items.Clear();
+            InitListView(this.studentList);
         }
     }
+
+    
 }
