@@ -15,6 +15,7 @@
       <Column Name="Sex" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Phone" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
       <Column Name="NativePlace" Type="System.String" DbType="VarChar(225)" CanBeNull="true" />
+      <Column Name="IsDel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

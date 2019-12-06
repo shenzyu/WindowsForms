@@ -82,6 +82,7 @@
             this.DeleteAll.TabIndex = 4;
             this.DeleteAll.Text = "删除所有";
             this.DeleteAll.UseVisualStyleBackColor = true;
+            this.DeleteAll.Click += new System.EventHandler(this.DeleteAll_Click);
             // 
             // FormList
             // 

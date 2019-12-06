@@ -235,6 +235,8 @@ namespace WindowsForms
 		
 		private string _NativePlace;
 		
+		private int _IsDel;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -249,6 +251,8 @@ namespace WindowsForms
     partial void OnPhoneChanged();
     partial void OnNativePlaceChanging(string value);
     partial void OnNativePlaceChanged();
+    partial void OnIsDelChanging(int value);
+    partial void OnIsDelChanged();
     #endregion
 		
 		public Student()
@@ -352,6 +356,26 @@ namespace WindowsForms
 					this._NativePlace = value;
 					this.SendPropertyChanged("NativePlace");
 					this.OnNativePlaceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDel", DbType="Int NOT NULL")]
+		public int IsDel
+		{
+			get
+			{
+				return this._IsDel;
+			}
+			set
+			{
+				if ((this._IsDel != value))
+				{
+					this.OnIsDelChanging(value);
+					this.SendPropertyChanging();
+					this._IsDel = value;
+					this.SendPropertyChanged("IsDel");
+					this.OnIsDelChanged();
 				}
 			}
 		}

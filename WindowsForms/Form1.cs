@@ -98,9 +98,15 @@ namespace WindowsForms
             {
                 long selcetId = long.Parse(studentList.SelectedItems[0].SubItems[0].Text);
                 Student student = studentService.SelectStudendById(selcetId);
-                studentService.DeleteStudent(student);
+                studentService.DeleteStudent(selcetId);
                 RefreshForm();
             }
+        }
+
+        private void DeleteAll_Click(object sender, EventArgs e)
+        {
+            studentService.DeleteAllStudent();
+            RefreshForm();
         }
     }
 
