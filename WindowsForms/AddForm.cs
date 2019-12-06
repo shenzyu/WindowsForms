@@ -1,38 +1,37 @@
 ﻿using System.Windows.Forms;
+using WindowsForms.Service;
+using WindowsForms.Service.Impl;
 
 namespace WindowsForms
 {
     public partial class AddForm : Form
     {
         public delegate void RefreshDelegate();
-        public event RefreshDelegate refresh;
+        public event RefreshDelegate Refresh;
+        private readonly IStudentService studentService = new StudentService();
         public AddForm()
         {
             InitializeComponent();
         }
 
-        private void clear_Click(object sender, System.EventArgs e)
+        private void Clear_Click(object sender, System.EventArgs e)
         {
 
         }
 
-        private void addDate_Click(object sender, System.EventArgs e)
+        private void AddDate_Click(object sender, System.EventArgs e)
         {
-           Student student = checkImput();
+           Student student = CheckImput();
             if(null != student)
             {
-                using (DataClasses1DataContext dc = new DataClasses1DataContext())
-                {
-                    dc.Student.InsertOnSubmit(student);
-                    dc.SubmitChanges();
-                }
+                studentService.AddStudent(student);
                 this.Close();
-                this.refresh();
+                this.Refresh();
             }
 
         }
 
-        private Student checkImput()
+        private Student CheckImput()
         {
             string errorMessage = string.Empty;
             string name = nameText.Text;

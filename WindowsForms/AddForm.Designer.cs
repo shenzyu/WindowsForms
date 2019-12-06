@@ -131,7 +131,7 @@ namespace WindowsForms
             this.addDate.TabIndex = 3;
             this.addDate.Text = "确认";
             this.addDate.UseVisualStyleBackColor = true;
-            this.addDate.Click += new System.EventHandler(this.addDate_Click);
+            this.addDate.Click += new System.EventHandler(this.AddDate_Click);
             // 
             // clear
             // 
@@ -142,7 +142,7 @@ namespace WindowsForms
             this.clear.TabIndex = 3;
             this.clear.Text = "清除";
             this.clear.UseVisualStyleBackColor = true;
-            this.clear.Click += new System.EventHandler(this.clear_Click);
+            this.clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // AddForm
             // 

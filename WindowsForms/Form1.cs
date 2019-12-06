@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using WindowsForms.Service;
+using WindowsForms.Service.Impl;
 
 namespace WindowsForms
 {
     public partial class FormList : Form
     {
+       private readonly IStudentService studentService = new StudentService();
+       
         public FormList()
         {
             InitializeComponent();
@@ -30,7 +34,7 @@ namespace WindowsForms
             studentList.FullRowSelect = true;  //显示全行
             studentList.MultiSelect = false;  //设置只能单选
             studentList.View = View.Details;  //设置显示模式为详细
-            studentList.HoverSelection = true;  //当鼠标停留数秒后自动选择
+         
             //把列名添加到listView中
             studentList.Columns.Add("编号", 90, HorizontalAlignment.Center);
             studentList.Columns.Add("姓名", 90, HorizontalAlignment.Center);
@@ -38,7 +42,7 @@ namespace WindowsForms
             studentList.Columns.Add("电话", 90, HorizontalAlignment.Center);
             studentList.Columns.Add("籍贯", 100, HorizontalAlignment.Center);
 
-            List<Student> studentDateList = SelectStudent();
+            List<Student> studentDateList = studentService.SelectStudendList();
 
             if (studentDateList.Count > 0)
             {
@@ -71,39 +75,32 @@ namespace WindowsForms
         private void add_Click(object sender, EventArgs e)
         {
             AddForm addForm = new AddForm { Visible = false, StartPosition = FormStartPosition.CenterParent };
-            addForm.refresh += RefreshForm;
+            addForm.Refresh += RefreshForm;
             addForm.ShowDialog();
         }
 
-        private List<Student> SelectStudent()
-        {
-            List<Student> studentList = new List<Student>();
-            using (DataClasses1DataContext dc = new DataClasses1DataContext())
-            {
-                var result = from Student in dc.Student
-
-                             select Student;
-
-                foreach (var st in result)
-                {
-                    Student student = new Student
-                    {
-                        Id = st.Id,
-                        Name = st.Name,
-                        Sex = st.Sex,
-                        Phone = st.Phone,
-                        NativePlace = st.NativePlace
-                    };
-                    studentList.Add(student);
-                }
-
-            }
-            return studentList;
-        }
+      
         public void RefreshForm()
         {
-            studentList.Items.Clear();
+            studentList.Items.Clear();      
             InitListView(this.studentList);
+        }
+
+        private void studentList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void DeleteSelect_Click(object sender, EventArgs e)
+        {
+            int selectCount = studentList.SelectedItems.Count;
+            if (selectCount > 0)//若selectCount大於0，说明用户有选中某列。
+            {
+                long selcetId = long.Parse(studentList.SelectedItems[0].SubItems[0].Text);
+                Student student = studentService.SelectStudendById(selcetId);
+                studentService.DeleteStudent(student);
+                RefreshForm();
+            }
         }
     }
 

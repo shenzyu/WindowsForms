@@ -31,8 +31,8 @@
             this.studentList = new System.Windows.Forms.ListView();
             this.add = new System.Windows.Forms.Button();
             this.update = new System.Windows.Forms.Button();
-            this.deleteSelect = new System.Windows.Forms.Button();
-            this.deleteAll = new System.Windows.Forms.Button();
+            this.DeleteSelect = new System.Windows.Forms.Button();
+            this.DeleteAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // studentList
@@ -43,6 +43,7 @@
             this.studentList.Size = new System.Drawing.Size(460, 283);
             this.studentList.TabIndex = 0;
             this.studentList.UseCompatibleStateImageBehavior = false;
+            this.studentList.SelectedIndexChanged += new System.EventHandler(this.studentList_SelectedIndexChanged);
             // 
             // add
             // 
@@ -63,23 +64,24 @@
             this.update.Text = "修改";
             this.update.UseVisualStyleBackColor = true;
             // 
-            // deleteSelect
+            // DeleteSelect
             // 
-            this.deleteSelect.Location = new System.Drawing.Point(318, 301);
-            this.deleteSelect.Name = "deleteSelect";
-            this.deleteSelect.Size = new System.Drawing.Size(75, 23);
-            this.deleteSelect.TabIndex = 3;
-            this.deleteSelect.Text = "删除选中";
-            this.deleteSelect.UseVisualStyleBackColor = true;
+            this.DeleteSelect.Location = new System.Drawing.Point(318, 301);
+            this.DeleteSelect.Name = "DeleteSelect";
+            this.DeleteSelect.Size = new System.Drawing.Size(75, 23);
+            this.DeleteSelect.TabIndex = 3;
+            this.DeleteSelect.Text = "删除选中";
+            this.DeleteSelect.UseVisualStyleBackColor = true;
+            this.DeleteSelect.Click += new System.EventHandler(this.DeleteSelect_Click);
             // 
-            // deleteAll
+            // DeleteAll
             // 
-            this.deleteAll.Location = new System.Drawing.Point(399, 301);
-            this.deleteAll.Name = "deleteAll";
-            this.deleteAll.Size = new System.Drawing.Size(75, 23);
-            this.deleteAll.TabIndex = 4;
-            this.deleteAll.Text = "删除所有";
-            this.deleteAll.UseVisualStyleBackColor = true;
+            this.DeleteAll.Location = new System.Drawing.Point(399, 301);
+            this.DeleteAll.Name = "DeleteAll";
+            this.DeleteAll.Size = new System.Drawing.Size(75, 23);
+            this.DeleteAll.TabIndex = 4;
+            this.DeleteAll.Text = "删除所有";
+            this.DeleteAll.UseVisualStyleBackColor = true;
             // 
             // FormList
             // 
@@ -87,8 +89,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(485, 336);
-            this.Controls.Add(this.deleteAll);
-            this.Controls.Add(this.deleteSelect);
+            this.Controls.Add(this.DeleteAll);
+            this.Controls.Add(this.DeleteSelect);
             this.Controls.Add(this.update);
             this.Controls.Add(this.add);
             this.Controls.Add(this.studentList);
@@ -105,8 +107,8 @@
         private System.Windows.Forms.ListView studentList;
         private System.Windows.Forms.Button add;
         private System.Windows.Forms.Button update;
-        private System.Windows.Forms.Button deleteSelect;
-        private System.Windows.Forms.Button deleteAll;
+        private System.Windows.Forms.Button DeleteSelect;
+        private System.Windows.Forms.Button DeleteAll;
     }
 }
 
