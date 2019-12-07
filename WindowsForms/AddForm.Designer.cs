@@ -42,6 +42,7 @@ namespace WindowsForms
             this.women = new System.Windows.Forms.RadioButton();
             this.addDate = new System.Windows.Forms.Button();
             this.clear = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // nameLabel
@@ -86,6 +87,7 @@ namespace WindowsForms
             // 
             // phoneText
             // 
+            this.phoneText.CausesValidation = false;
             this.phoneText.Location = new System.Drawing.Point(60, 65);
             this.phoneText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.phoneText.Name = "phoneText";
@@ -94,6 +96,7 @@ namespace WindowsForms
             // 
             // placeText
             // 
+            this.placeText.CausesValidation = false;
             this.placeText.Location = new System.Drawing.Point(60, 92);
             this.placeText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.placeText.Name = "placeText";
@@ -124,7 +127,7 @@ namespace WindowsForms
             // 
             // addDate
             // 
-            this.addDate.Location = new System.Drawing.Point(27, 131);
+            this.addDate.Location = new System.Drawing.Point(29, 131);
             this.addDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addDate.Name = "addDate";
             this.addDate.Size = new System.Drawing.Size(64, 23);
@@ -144,11 +147,23 @@ namespace WindowsForms
             this.clear.UseVisualStyleBackColor = true;
             this.clear.Click += new System.EventHandler(this.Clear_Click);
             // 
+            // Id
+            // 
+            this.Id.AutoSize = true;
+            this.Id.CausesValidation = false;
+            this.Id.Location = new System.Drawing.Point(105, 136);
+            this.Id.Name = "Id";
+            this.Id.Size = new System.Drawing.Size(17, 12);
+            this.Id.TabIndex = 4;
+            this.Id.Text = "Id";
+            this.Id.Visible = false;
+            // 
             // AddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(230, 189);
+            this.Controls.Add(this.Id);
             this.Controls.Add(this.clear);
             this.Controls.Add(this.addDate);
             this.Controls.Add(this.women);
@@ -180,5 +195,6 @@ namespace WindowsForms
         private System.Windows.Forms.Label palceLabel;
         private System.Windows.Forms.Label sexLabel;
         private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label Id;
     }
 }

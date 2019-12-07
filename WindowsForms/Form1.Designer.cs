@@ -30,7 +30,7 @@
         {
             this.studentList = new System.Windows.Forms.ListView();
             this.add = new System.Windows.Forms.Button();
-            this.update = new System.Windows.Forms.Button();
+            this.Update = new System.Windows.Forms.Button();
             this.DeleteSelect = new System.Windows.Forms.Button();
             this.DeleteAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -55,14 +55,15 @@
             this.add.UseVisualStyleBackColor = true;
             this.add.Click += new System.EventHandler(this.add_Click);
             // 
-            // update
+            // Update
             // 
-            this.update.Location = new System.Drawing.Point(237, 301);
-            this.update.Name = "update";
-            this.update.Size = new System.Drawing.Size(75, 23);
-            this.update.TabIndex = 2;
-            this.update.Text = "修改";
-            this.update.UseVisualStyleBackColor = true;
+            this.Update.Location = new System.Drawing.Point(237, 301);
+            this.Update.Name = "Update";
+            this.Update.Size = new System.Drawing.Size(75, 23);
+            this.Update.TabIndex = 2;
+            this.Update.Text = "修改";
+            this.Update.UseVisualStyleBackColor = true;
+            this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
             // DeleteSelect
             // 
@@ -92,7 +93,7 @@
             this.ClientSize = new System.Drawing.Size(485, 336);
             this.Controls.Add(this.DeleteAll);
             this.Controls.Add(this.DeleteSelect);
-            this.Controls.Add(this.update);
+            this.Controls.Add(this.Update);
             this.Controls.Add(this.add);
             this.Controls.Add(this.studentList);
             this.Location = new System.Drawing.Point(15, 15);
@@ -107,7 +108,7 @@
 
         private System.Windows.Forms.ListView studentList;
         private System.Windows.Forms.Button add;
-        private System.Windows.Forms.Button update;
+        private System.Windows.Forms.Button Update;
         private System.Windows.Forms.Button DeleteSelect;
         private System.Windows.Forms.Button DeleteAll;
     }

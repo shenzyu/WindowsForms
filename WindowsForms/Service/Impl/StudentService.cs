@@ -75,7 +75,7 @@ namespace WindowsForms.Service.Impl
             using (DataClasses1DataContext dc = new DataClasses1DataContext())
             {
                 var result = from Student in dc.Student
-                             where Student.IsDel ==0
+                             where Student.IsDel == 0
                              select Student;
 
                 foreach (var st in result)
@@ -95,9 +95,18 @@ namespace WindowsForms.Service.Impl
             return studentList;
         }
 
-        public void UpdateStudendById(Student student)
+        public void UpdateStudend(Student student)
         {
-           
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                Student dcStudent = dc.Student.First(s => s.Id == student.Id);
+                dcStudent.Name = student.Name;
+                dcStudent.Phone = student.Phone;
+                dcStudent.Sex = student.Sex;
+                dcStudent.NativePlace = student.NativePlace;
+               dc.SubmitChanges();
+            }
         }
     }
 }
+

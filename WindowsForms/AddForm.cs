@@ -12,23 +12,65 @@ namespace WindowsForms
         public AddForm()
         {
             InitializeComponent();
+
+        }
+
+        public AddForm(Student student)
+        {
+
+            InitializeComponent();
+
+            if (null != student)
+            {
+                nameText.Text = student.Name;
+                switch (student.Sex)
+                {
+                    case 0:
+                        men.Checked = true;
+                        break;
+                    case 1:
+                        women.Checked = true;
+                        break;
+                }
+                phoneText.Text = student.Phone;
+                placeText.Text = student.NativePlace;
+                Id.Text = student.Id.ToString();
+            }
+
         }
 
         private void Clear_Click(object sender, System.EventArgs e)
         {
-
+            nameText.Text = string.Empty;
+            men.Checked = false;
+            women.Checked = false;
+            phoneText.Text = string.Empty;
+            placeText.Text = string.Empty;
         }
 
         private void AddDate_Click(object sender, System.EventArgs e)
         {
-           Student student = CheckImput();
-            if(null != student)
+            Student student = CheckImput();
+            if (null != Id.Text)
+            {
+                //认为是修改操作
+                student.Id = long.Parse(Id.Text);
+                studentService.UpdateStudend(student);
+                RefreshForm1();
+
+            }
+            else if (null != student)
             {
                 studentService.AddStudent(student);
-                this.Close();
-                this.Refresh();
+                RefreshForm1();
             }
 
+        }
+
+        private void RefreshForm1()
+        {
+            this.Close();
+            this.Refresh();
         }
 
         private Student CheckImput()
@@ -63,6 +105,7 @@ namespace WindowsForms
             else
             {
                 Student student = new Student { Name = name, Sex = sex, Phone = phone, NativePlace = place };
+
                 return student;
             }
         }

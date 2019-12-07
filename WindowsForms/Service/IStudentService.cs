@@ -14,9 +14,9 @@ namespace WindowsForms.Service
         Student SelectStudendById(long Id);
 
         /**
-        * 根据Id修改
+        * 修改
         */
-        void UpdateStudendById(Student student);
+        void UpdateStudend(Student student);
 
         /**
         * 列表查询
