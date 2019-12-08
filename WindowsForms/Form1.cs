@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using WindowsForms.Service;
 using WindowsForms.Service.Impl;
@@ -25,7 +26,15 @@ namespace WindowsForms
 
         private void InitListView(ListView studentList)
         {
+            List<Student> studentDateList = studentService.SelectStudendList();
 
+            loadListView(studentList, studentDateList);
+
+        }
+
+
+        private void loadListView(ListView studentList, List<Student> studentDateList)
+        {
             //添加列名
             //设置属性
             studentList.GridLines = true;  //显示网格线
@@ -39,8 +48,6 @@ namespace WindowsForms
             studentList.Columns.Add("性别", 90, HorizontalAlignment.Center);
             studentList.Columns.Add("电话", 90, HorizontalAlignment.Center);
             studentList.Columns.Add("籍贯", 100, HorizontalAlignment.Center);
-
-            List<Student> studentDateList = studentService.SelectStudendList();
 
             if (studentDateList.Count > 0)
             {
@@ -67,7 +74,6 @@ namespace WindowsForms
 
                 this.studentList.EndUpdate();
             }
-
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -123,6 +129,44 @@ namespace WindowsForms
             }
             return null;
 
+        }
+
+        private void Query_Click(object sender, EventArgs e)
+        {
+            List<Student> studentDateList = null;
+            String name = textQueryName.Text;
+            String sex = sexComboBox.Text;
+            if (!String.Equals(name, String.Empty))
+            {
+                studentDateList = studentService.SelectStudendList();
+                studentDateList = studentDateList.Where(s => s.Name.Contains(name)).ToList();
+            }
+            if (!String.Equals(sex, String.Empty))
+            {
+                if (null == studentDateList)
+                {
+                   studentDateList = studentService.SelectStudendList();
+                }
+                switch (sex)
+                {
+                    case "男":
+                        studentDateList = studentDateList.Where(s => s.Sex==0).ToList();
+                        break;
+                    case "女":
+                        studentDateList = studentDateList.Where(s => s.Sex == 1).ToList();
+                        break;
+                }
+
+
+            }
+            studentList.Items.Clear();
+            loadListView(studentList, studentDateList);
+        }
+
+        private void Reset_Click(object sender, EventArgs e)
+        {
+            textQueryName.Text = String.Empty;
+            sexComboBox.Text = String.Empty;
         }
     }
 
